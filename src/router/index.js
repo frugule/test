@@ -8,7 +8,8 @@ Vue.use(VueRouter)
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: Home,
+    alias: ['/home', '/casa', '/homepage']
   },
   {
     path: '/login',
