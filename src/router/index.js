@@ -17,7 +17,7 @@ Vue.use(VueRouter)
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/Login.vue')
+    component: () => import(/* webpackChunkName: "login" */ '../views/Login.vue')
   },
   {
     path: '/register',
@@ -25,8 +25,13 @@ Vue.use(VueRouter)
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import( /* webpackChunkName: "about" */ '../views/Register.vue')
-  }
+    component: () => import( /* webpackChunkName: "register" */ '../views/Register.vue')
+  },
+  {
+      path: '/admin',
+      name: 'Admin',
+      component: () => import( /* webpackChunkName: "admin" */ '../views/Admin.vue')
+    }
 
 ]
 
