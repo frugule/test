@@ -94,7 +94,11 @@ import {mapState, mapActions} from 'vuex'
     methods: {
       ...mapActions(['postCourse']),
       submitForm(){
-        this.currentCourse.id
+        if(this.currentCourse.id){
+          console.log(this.currentCourse.id)
+        }else{
+          this.postCourse()
+        }
       },
       /*
       onSubmit(evt) {
