@@ -28,6 +28,7 @@
         <b-form-group id="input-group-2" label="Descripción:" label-for="input-2">
           
           <b-form-textarea
+          v-model="currentCourse.data.description"
           id="textarea-large"
           size="lg"
           placeholder="Large textarea"

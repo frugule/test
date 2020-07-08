@@ -9,7 +9,7 @@ Vue.use(VueRouter)
     path: '/',
     name: 'Home',
     component: Home,
-    alias: ['/home', '/casa', '/homepage']
+    alias: ['/home', '/casa', '/homepage', '/inicio']
   },
   {
     path: '/login',
@@ -28,10 +28,15 @@ Vue.use(VueRouter)
     component: () => import( /* webpackChunkName: "register" */ '../views/Register.vue')
   },
   {
-      path: '/admin',
-      name: 'Admin',
-      component: () => import( /* webpackChunkName: "admin" */ '../views/Admin.vue')
-    }
+    path: '/admin',
+    name: 'Admin',
+    component: () => import( /* webpackChunkName: "admin" */ '../views/Admin.vue')
+  },
+  {
+    path: '/table',
+    name: 'Table',
+    component: () => import( /* webpackChunkName: "table" */ '../views/OnlyTable.vue')
+  }
 
 ]
 
