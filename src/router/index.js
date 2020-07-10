@@ -35,7 +35,8 @@ Vue.use(VueRouter)
   {
     path: '/table',
     name: 'Table',
-    component: () => import( /* webpackChunkName: "table" */ '../views/OnlyTable.vue')
+    component: () => import( /* webpackChunkName: "table" */ '../views/OnlyTable.vue'),
+    alias: ['/tabla']
   }
 
 ]

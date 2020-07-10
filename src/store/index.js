@@ -24,6 +24,7 @@ export default new Vuex.Store({
   state: {
     products:[],
     currentCourse: emptyCourse(),
+    showExample: false,
     
   },
   mutations: {
@@ -35,6 +36,9 @@ export default new Vuex.Store({
       })
     },
     GET_COURSES(state, data){state.products = data},
+    UPDATE_SHOW_EXAMPLE(state, value) {
+      state.showExample = value
+    },
     //CREATE_COURSE(state, data){state.currentCourse = data}
   },
   actions: {
@@ -57,9 +61,21 @@ export default new Vuex.Store({
         commit('SET_EMPTY_COURSE')
         dispatch('getCourses')
       })
-    }
+    },
+    updateShowExample({commit}, val) {
+      console.log('setting showCart to ', val)
+      return new Promise((resolve, reject) => {
+        try {
+          commit('UPDATE_SHOW_EXAMPLE', !!val) // !! double-negation for Boolen casting
+          resolve(true)
+        } catch(e) { reject(e) }
+      })
+    },
   },
   
   modules: {
+  },
+  getters:{
+    showExample: state => state.showExample,
   }
 })
