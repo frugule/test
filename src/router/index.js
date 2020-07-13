@@ -37,7 +37,20 @@ Vue.use(VueRouter)
     name: 'Table',
     component: () => import( /* webpackChunkName: "table" */ '../views/OnlyTable.vue'),
     alias: ['/tabla']
+  },
+  {
+    path: '/example',
+    component: () => import( /* webpackChunkName: "examples" */ '../views/Examples.vue'),
+    name: 'Example',
+    
+    alias: ['/ejemplo', '/ejemplos', '/examples']
+  },
+  {
+    path: '*',
+    name: 'NotFound',
+    component: () => import( /* webpackChunkName: "NotFound" */ '../views/NotFound.vue'),
   }
+
 
 ]
 

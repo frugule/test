@@ -74,7 +74,7 @@
         ></b-form-textarea>
         </b-form-group>
 
-        <b-button @click="submitForm" type="submit" variant="primary">Enviar</b-button>
+        <b-button type="submit" variant="primary"  @click="submitForm">{{!!currentCourse.id ? 'Actualizar':'Crear'}}</b-button>
         <b-button type="reset" variant="danger">Reset</b-button>
       </b-form>
     </b-container>
@@ -93,10 +93,10 @@ import {mapState, mapActions} from 'vuex'
       ...mapState(['currentCourse'])
     },
     methods: {
-      ...mapActions(['postCourse']),
+      ...mapActions(['postCourse', 'updateName', 'updatePicture', 'updateDescription', 'updateExample', 'updateCourse']),
       submitForm(){
         if(this.currentCourse.id){
-          console.log(this.currentCourse.id)
+          this.updateCourse(this.currentCourse.id)
         }else{
           this.postCourse()
         }
@@ -110,10 +110,12 @@ import {mapState, mapActions} from 'vuex'
       onReset(evt) {
         evt.preventDefault()
         // Reset our form values
-        this.form.email = ''
-        this.form.name = ''
-        this.form.food = null
-        this.form.checked = []
+        this.currentCourse.data.name= ''
+        this.currentCourse.data.picture = ''
+        this.currentCourse.data.description = ''
+        this.currentCourse.data.examples.title = ''
+        this.currentCourse.data.examples.mp3 = ''
+        this.currentCourse.data.examples.description = ''
         // Trick to reset/clear native browser form validation state
         this.show = false
         this.$nextTick(() => {

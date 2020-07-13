@@ -27,18 +27,18 @@
 <script>
 import {mapState, mapActions} from 'vuex'
 export default {
-        name:'CourseCard',
-        methods:{
-        ...mapActions(['getCourses'])
-        },
+  name:'CourseCard',
+  methods:{
+  ...mapActions(['getCourses'])
+  },
 
-        computed: {
-        ...mapState(['products']),
-        // cardList() {
-        // console.log(this.courses)
-        // return this.courses
-        // }
-        },
+  computed: {
+  ...mapState(['products']),
+  // cardList() {
+  // console.log(this.courses)
+  // return this.courses
+  // }
+  },
   created() {
     this.$store.dispatch('getCourses')
   },

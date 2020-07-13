@@ -24,7 +24,6 @@ export default new Vuex.Store({
   state: {
     products:[],
     currentCourse: emptyCourse(),
-    showExample: false,
     
   },
   mutations: {
@@ -35,14 +34,17 @@ export default new Vuex.Store({
         state.currentCourse.data[key] = base.data[key]
       })
     },
+    GET_CURRENT_COURSE(state, product){state.currentCourse = product},
     GET_COURSES(state, data){state.products = data},
-    UPDATE_SHOW_EXAMPLE(state, value) {
-      state.showExample = value
-    },
+    UPDATE_NAME(state, name){state.currentCourse.data.name = name},
+    UPDATE_PICTURE(state, picture){state.currentCourse.data.picture = picture},
+    UPDATE_DESCRIPTION(state, description){state.currentCourse.data.description = description},
+    UPDATE_EXAMPLE(state, example){state.currentCourse.data.example = example},
     //CREATE_COURSE(state, data){state.currentCourse = data}
   },
   actions: {
     getCourses({commit}) {
+      commit('SET_EMPTY_COURSE')
       axios.get(`${baseUrl}/products`, {
         headers: {
           "Content-type": "text/plain"
@@ -62,20 +64,39 @@ export default new Vuex.Store({
         dispatch('getCourses')
       })
     },
-    updateShowExample({commit}, val) {
-      console.log('setting showCart to ', val)
-      return new Promise((resolve, reject) => {
-        try {
-          commit('UPDATE_SHOW_EXAMPLE', !!val) // !! double-negation for Boolen casting
-          resolve(true)
-        } catch(e) { reject(e) }
+    deleteCourse({dispatch, commit}, id){
+      axios.delete(`${baseUrl}/product/${id}`)
+      .then(() => {
+      //trae los datos de la lista(envia los datos)
+      commit('SET_EMPTY_COURSE')
+      dispatch('getCourses')
       })
     },
+    updateCourse({ state, dispatch }, id){
+      axios.put(`${baseUrl}/product/${id}`, state.currentCourse.data)
+      .then(() => {
+        dispatch('getCourses')
+      })
+    },
+    getCurrentCourse({ commit }, id){
+      axios.get(`${baseUrl}/product/${id}`)
+      .then((response) =>{
+        commit('GET_CURRENT_COURSE', response.data)
+      })
+    },
+    updateName({ commit }, name){ commit('UPDATE_NAME', name)},
+    updatePicture({ commit }, picture){ commit('UPDATE_PICTURE', picture)},
+    updateDescription({ commit }, description){ commit('UPDATE_DESCRIPTION', description)},
+    updateExample({ commit }, example){ commit('UPDATE_EXAMPLE', example)},
+    closeForm({commit}){
+      commit('SET_EMPTY_COURSE')
+    },
+    
   },
   
   modules: {
   },
   getters:{
-    showExample: state => state.showExample,
+    //showExample: state => state.showExample,
   }
 })
